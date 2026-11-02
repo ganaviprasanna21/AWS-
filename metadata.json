@@ -1,0 +1,6 @@
+{
+  "name": "The Midnight Society - AWS Student Builders",
+  "description": "A luxury gothic vampire-themed enclave for the AWS Student Builders Group, featuring distributed cloud architecture, nocturnal hackathons, and immersive castle lore.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

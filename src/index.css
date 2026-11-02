@@ -1,0 +1,113 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-cinzel: "Cinzel", Georgia, serif;
+  --font-cinzel-decorative: "Cinzel Decorative", Georgia, serif;
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-crimson-blood: #7b0d1e;
+  --color-crimson-bright: #b81424;
+  --color-crimson-glow: #e6192e;
+  --color-burgundy-abyss: #1a0508;
+  --color-burgundy-vault: #2b0b11;
+  --color-obsidian-crypt: #070608;
+  --color-obsidian-surface: #0e0c10;
+  --color-antique-silver: #c8cbd0;
+  --color-antique-border: #382c30;
+}
+
+/* Custom dark gothic scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070608;
+}
+::-webkit-scrollbar-thumb {
+  background: #2b0b11;
+  border-radius: 4px;
+  border: 1px solid #7b0d1e33;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7b0d1e;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 3D Gate Perspective */
+.perspective-gates {
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Ornate Gothic Borders & Shadows */
+.gothic-glow-crimson {
+  box-shadow: 0 0 30px -5px rgba(184, 20, 36, 0.35);
+}
+
+.gothic-glow-moon {
+  box-shadow: 0 0 70px 20px rgba(184, 20, 36, 0.45);
+}
+
+.gothic-card-border {
+  border: 1px solid rgba(197, 203, 211, 0.12);
+  background: linear-gradient(180deg, rgba(26, 5, 8, 0.6) 0%, rgba(14, 12, 16, 0.85) 100%);
+  backdrop-filter: blur(12px);
+}
+
+.gothic-card-border:hover {
+  border-color: rgba(184, 20, 36, 0.45);
+  box-shadow: 0 10px 40px -10px rgba(123, 13, 30, 0.3);
+}
+
+/* Ornate filigree subtle corner accents */
+.filigree-corner-tl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid rgba(197, 203, 211, 0.4);
+  border-left: 2px solid rgba(197, 203, 211, 0.4);
+  pointer-events: none;
+}
+.filigree-corner-tr {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid rgba(197, 203, 211, 0.4);
+  border-right: 2px solid rgba(197, 203, 211, 0.4);
+  pointer-events: none;
+}
+.filigree-corner-bl {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-bottom: 2px solid rgba(197, 203, 211, 0.4);
+  border-left: 2px solid rgba(197, 203, 211, 0.4);
+  pointer-events: none;
+}
+.filigree-corner-br {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  border-bottom: 2px solid rgba(197, 203, 211, 0.4);
+  border-right: 2px solid rgba(197, 203, 211, 0.4);
+  pointer-events: none;
+}

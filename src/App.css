@@ -1,0 +1,1020 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #080607;
+  color: #f5e9e5;
+  font-family: 'Plus Jakarta Sans', Montserrat, sans-serif;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Base Gothic Aesthetic */
+.vampire {
+  background: #080607;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ===================================================
+   CINEMATIC 3D CASTLE GATE INTRO
+   =================================================== */
+.intro {
+  height: 100vh;
+  min-height: 650px;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  background: #080607;
+  perspective: 1200px;
+}
+
+.intro-camera-rig {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 2.2s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 2.2s ease-in-out;
+}
+
+.intro-camera-rig.opening {
+  transform: translateZ(450px) scale(1.6);
+  opacity: 0;
+}
+
+.intro-bg, .hero-image, .manifesto-bg, .join-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.intro-bg {
+  background-image: linear-gradient(180deg, rgba(8, 6, 7, 0.7) 0%, rgba(8, 6, 7, 0.3) 50%, rgba(8, 6, 7, 0.85) 100%),
+    url('/src/assets/images/hero_gothic_castle_1793608988540.jpg');
+  filter: brightness(0.85) contrast(1.15);
+}
+
+.moon {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff2d46 0%, #b81428 50%, #680a17 100%);
+  box-shadow: 0 0 90px #d21b38, 0 0 200px #941123, inset -15px -15px 40px rgba(0, 0, 0, 0.65);
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.92;
+  z-index: 1;
+  animation: moonGlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes moonGlow {
+  from {
+    box-shadow: 0 0 80px #d21b38, 0 0 180px #941123;
+  }
+  to {
+    box-shadow: 0 0 110px #ff2a4b, 0 0 240px #b81428;
+  }
+}
+
+.fog {
+  position: absolute;
+  z-index: 4;
+  width: 200%;
+  height: 200px;
+  background: radial-gradient(ellipse 60% 80px at 50% 50%, rgba(184, 20, 36, 0.16), rgba(30, 15, 22, 0.12) 60%, transparent 100%);
+  pointer-events: none;
+  animation: fog 16s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.fog-one {
+  bottom: 6%;
+  left: -50%;
+}
+
+.fog-two {
+  bottom: 20%;
+  left: -80%;
+  animation-delay: -6s;
+  animation-duration: 20s;
+}
+
+@keyframes fog {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(50%, 0, 0);
+  }
+}
+
+.castle {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 38%;
+  background: linear-gradient(transparent, #050304 80%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ===================================================
+   3D DOUBLE GATES (PHYSICAL DOORS CLOSED IN CENTRE)
+   =================================================== */
+.gates-container {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+/* Left & Right Stone Pillars flanking the gates */
+.pillar-left, .pillar-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 10;
+  background: linear-gradient(90deg, #181215, #0c090b);
+  border-bottom: 2px solid #332027;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
+}
+
+.pillar-left {
+  left: 0;
+  border-right: 2px solid #3d242d;
+}
+
+.pillar-right {
+  right: 0;
+  border-left: 2px solid #3d242d;
+}
+
+.gate {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  width: 50%;
+  background: linear-gradient(180deg, rgba(16, 12, 14, 0.95) 0%, rgba(8, 6, 8, 0.98) 100%);
+  border-top: 4px solid #554047;
+  box-shadow: inset 0 0 45px #000, 0 10px 40px rgba(0, 0, 0, 0.85);
+  transform-style: preserve-3d;
+  transition: transform 2.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  overflow: hidden;
+}
+
+.gate-left {
+  left: 0;
+  transform-origin: left center;
+  border-right: 2px solid #2d1820;
+}
+
+.gate-right {
+  right: 0;
+  transform-origin: right center;
+  border-left: 2px solid #2d1820;
+}
+
+/* Active 3D Swing Open when entering */
+.intro-camera-rig.opening .gate-left {
+  transform: perspective(1200px) rotateY(-110deg);
+}
+
+.intro-camera-rig.opening .gate-right {
+  transform: perspective(1200px) rotateY(110deg);
+}
+
+/* Wrought iron filigree bars inside each gate */
+.gate-bars {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    #130e10 0px,
+    #130e10 24px,
+    #3f2f35 25px,
+    #694e59 28px,
+    #251a1e 30px,
+    #0f0a0c 32px
+  );
+  opacity: 0.92;
+}
+
+.gate-tracery {
+  position: absolute;
+  top: 10%;
+  inset-x: 20px;
+  height: 120px;
+  border: 2px solid #5a414b;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.6;
+}
+
+.gate:before {
+  content: '♛';
+  position: absolute;
+  top: 24%;
+  font-size: 42px;
+  color: #c49987;
+  text-shadow: 0 0 20px #b22, 0 0 35px #821;
+  z-index: 6;
+}
+
+.gate-left:before {
+  right: 18px;
+}
+
+.gate-right:before {
+  left: 18px;
+}
+
+.gate:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #7b1d2c 0%, #3a151e 100%);
+  box-shadow: 0 0 15px rgba(184, 20, 36, 0.6);
+}
+
+.gate-left:after {
+  right: 0;
+}
+
+.gate-right:after {
+  left: 0;
+}
+
+/* Volumetric crimson light flare behind gates when opening */
+.gate-backlight {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230, 25, 46, 0.85) 0%, rgba(123, 13, 30, 0.4) 50%, transparent 75%);
+  filter: blur(50px);
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 1.2s ease, transform 1.8s ease;
+  pointer-events: none;
+}
+
+.intro-camera-rig.opening .gate-backlight {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(2.5);
+}
+
+/* Intro UI Content */
+.intro-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 30px;
+  margin: auto;
+  max-width: 820px;
+  background: radial-gradient(circle at center, rgba(16, 10, 13, 0.85) 0%, rgba(8, 6, 7, 0.95) 75%);
+  border: 1px solid rgba(85, 41, 51, 0.8);
+  border-radius: 16px;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(184, 20, 36, 0.25);
+  backdrop-filter: blur(10px);
+  transition: opacity 0.5s ease;
+}
+
+.intro-camera-rig.opening .intro-content {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-top {
+  position: relative;
+  z-index: 15;
+  width: 100%;
+  max-width: 1200px;
+  padding: 24px 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skip-btn {
+  background: rgba(16, 10, 13, 0.7);
+  border: 1px solid #4a212a;
+  color: #cbbaba;
+  font-family: Cinzel, serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.skip-btn:hover {
+  color: #ff334b;
+  border-color: #921b2a;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: #e09ba0;
+  margin-bottom: 20px;
+  font-family: Cinzel, serif;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.intro h1, .hero h1, .join h2 {
+  font-family: 'Cinzel Decorative', Cinzel, serif;
+  font-size: clamp(38px, 6.5vw, 84px);
+  line-height: 1.08;
+  letter-spacing: 4px;
+  font-weight: 700;
+  color: #f5ece9;
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.9);
+}
+
+.intro h1 span, .hero h1 span, .join h2 span, .center-heading h2 span, .about h2 span {
+  color: #d11f37;
+  text-shadow: 0 0 25px rgba(209, 31, 55, 0.5);
+}
+
+.intro-sub {
+  font-family: Cinzel, serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  margin-top: 22px;
+  color: #dfcec8;
+  font-weight: 500;
+}
+
+.enter-btn, .red-btn {
+  margin-top: 32px;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, #9b192a 0%, #680e1a 100%);
+  color: #fdfafa;
+  border: 1px solid #e06a78;
+  letter-spacing: 3px;
+  font-family: Cinzel, serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 4px;
+  box-shadow: 0 0 25px rgba(155, 25, 42, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.15);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.enter-btn:hover, .red-btn:hover {
+  background: linear-gradient(135deg, #c1273d 0%, #851222 100%);
+  box-shadow: 0 0 40px rgba(224, 40, 65, 0.75), inset 0 0 15px rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px) scale(1.02);
+  color: #fff;
+}
+
+.warning {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #c18b8b;
+  margin-top: 24px;
+  font-family: Cinzel, serif;
+}
+
+.intro-bottom {
+  position: relative;
+  z-index: 10;
+  padding-bottom: 24px;
+  letter-spacing: 4px;
+  font-size: 10px;
+  color: #a68c8c;
+  font-family: Cinzel, serif;
+}
+
+/* ===================================================
+   MAIN WEBSITE STYLES
+   =================================================== */
+.website {
+  position: relative;
+  background: #080607;
+  color: #f5e9e5;
+  min-height: 100vh;
+}
+
+.navbar {
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7%;
+  background: rgba(12, 8, 10, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #442128;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.brand {
+  font-family: Cinzel, serif;
+  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  color: #f5ece9;
+}
+
+.brand-icon {
+  color: #b52b3c;
+  font-size: 26px;
+  filter: drop-shadow(0 0 8px rgba(181, 43, 60, 0.6));
+}
+
+.brand b {
+  color: #d11f37;
+}
+
+.navlinks {
+  display: flex;
+  gap: 28px;
+}
+
+.navlinks button, .mobile-links button {
+  background: none;
+  border: 0;
+  color: #cbbaba;
+  font-family: Cinzel, serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  transition: color 0.3s;
+  padding: 6px 0;
+  position: relative;
+}
+
+.navlinks button:hover {
+  color: #ff3850;
+}
+
+.navlinks button:hover:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: #d11f37;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.mobile-links {
+  display: none;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 740px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 9%;
+  overflow: hidden;
+}
+
+.hero-image {
+  background-image: url('/src/assets/images/hero_gothic_castle_1793608988540.jpg');
+  filter: brightness(0.4) contrast(1.1);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #080607 10%, rgba(8, 6, 7, 0.8) 50%, rgba(8, 6, 7, 0.3) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  padding: 60px 0;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 6.5vw, 84px);
+  line-height: 1.1;
+  margin: 15px 0;
+}
+
+.hero-content > p:not(.eyebrow) {
+  max-width: 480px;
+  color: #c6b7b4;
+  line-height: 1.9;
+  margin-top: 24px;
+  font-size: 14px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.vertical-text {
+  position: absolute;
+  right: 35px;
+  writing-mode: vertical-rl;
+  letter-spacing: 5px;
+  font-size: 10px;
+  font-family: Cinzel, serif;
+  color: #c38a8c;
+}
+
+/* Section Standards */
+.section {
+  padding: 110px 9%;
+  position: relative;
+}
+
+.section-label {
+  font-family: Cinzel, serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #c14759;
+  border-bottom: 1px solid #49232b;
+  padding-bottom: 22px;
+  text-transform: uppercase;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  padding-top: 75px;
+}
+
+.about h2, .center-heading h2 {
+  font-family: Cinzel, serif;
+  font-size: clamp(34px, 4.5vw, 62px);
+  line-height: 1.2;
+  letter-spacing: 3px;
+  color: #f5ece9;
+}
+
+.about-text p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: #d6c6c4;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.stats {
+  display: flex;
+  gap: 45px;
+  margin-top: 40px;
+  padding-top: 25px;
+  border-top: 1px solid #33181f;
+}
+
+.stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stats strong {
+  font-family: 'Cinzel Decorative', Cinzel, serif;
+  color: #d11f37;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.stats small {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #b9a3a3;
+  font-family: Cinzel, serif;
+}
+
+/* Manifesto Section */
+.manifesto {
+  height: 520px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+  border-y: 1px solid #3d1b24;
+}
+
+.manifesto-bg {
+  background-image: url('/src/assets/images/cloud_grimoire_sanctum_1793608988620.jpg');
+  filter: brightness(0.25) contrast(1.2);
+}
+
+.manifesto-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+  max-width: 800px;
+}
+
+.manifesto-content > span {
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: #e1a0a3;
+  font-family: Cinzel, serif;
+}
+
+.manifesto h2 {
+  font-family: Cinzel, serif;
+  font-size: clamp(36px, 5.5vw, 68px);
+  line-height: 1.25;
+  letter-spacing: 4px;
+  margin: 26px 0;
+  color: #fdf6f5;
+}
+
+.manifesto h2 i {
+  color: #d11f37;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.manifesto p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  color: #d1bdbb;
+  letter-spacing: 1px;
+}
+
+/* Leaders / The Council */
+.center-heading {
+  text-align: center;
+  padding: 65px 0 55px;
+}
+
+.center-heading h2 {
+  font-size: clamp(34px, 4.5vw, 56px);
+  margin-top: 10px;
+}
+
+.center-heading > p:last-child {
+  color: #ad9998;
+  margin-top: 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+}
+
+.leader-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.leader-card {
+  background: #130d10;
+  border: 1px solid #42232a;
+  padding: 24px;
+  border-radius: 8px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.leader-card:hover {
+  transform: translateY(-8px);
+  border-color: #c0394e;
+  box-shadow: 0 15px 40px rgba(80, 13, 26, 0.35);
+}
+
+.leader-art {
+  height: 220px;
+  background: radial-gradient(circle, #49202c, #180e13 70%);
+  display: grid;
+  place-items: center;
+  position: relative;
+  border: 1px solid #55313a;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.leader-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.leader-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid #b85a68;
+  display: grid;
+  place-items: center;
+  color: #e8aeb0;
+  font-size: 46px;
+  background: #260e17;
+  box-shadow: 0 0 35px rgba(154, 38, 59, 0.45);
+}
+
+.leader-number {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  color: #b65a68;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-family: Cinzel, serif;
+}
+
+.leader-corner {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  color: #b65a68;
+}
+
+.leader-role {
+  color: #bd6973;
+  font-size: 10px;
+  letter-spacing: 3px;
+  margin-top: 22px;
+  text-transform: uppercase;
+  font-family: Cinzel, serif;
+  font-weight: 700;
+}
+
+.leader-card h3 {
+  font-family: Cinzel, serif;
+  font-size: 18px;
+  margin-top: 10px;
+  min-height: 26px;
+  color: #f7eff0;
+}
+
+.leader-line {
+  width: 40px;
+  border-bottom: 2px solid #a82b40;
+  margin-top: 16px;
+}
+
+/* Events Section */
+.events {
+  background: #0c080a;
+}
+
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.event-card {
+  border: 1px solid #48232c;
+  background: linear-gradient(145deg, #180c12, #0d090b);
+  padding: 38px;
+  min-height: 320px;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.event-card:hover {
+  border-color: #ba394e;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 35px rgba(186, 57, 78, 0.2);
+}
+
+.event-number {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  color: #92515a;
+  font-family: Cinzel, serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.event-card > svg {
+  color: #d11f37;
+  margin: 25px 0 20px;
+}
+
+.event-card h3 {
+  font-family: Cinzel, serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: #fdf7f8;
+}
+
+.event-card h4 {
+  font-family: 'Cormorant Garamond', serif;
+  color: #d18b93;
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 8px;
+}
+
+.event-card p {
+  color: #aba09f;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 16px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.event-star {
+  position: absolute;
+  bottom: 20px;
+  right: 22px;
+  color: #9b3b4a;
+}
+
+/* Join / Vision Section */
+.join {
+  height: 520px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+  border-y: 1px solid #3d1b24;
+}
+
+.join-bg {
+  background-image: url('/src/assets/images/midnight_hackathon_ritual_1793608991275.jpg');
+  filter: brightness(0.25) contrast(1.15);
+}
+
+.join-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+  max-width: 750px;
+}
+
+.join-content > svg {
+  color: #d11f37;
+  margin-bottom: 20px;
+}
+
+.join h2 {
+  font-size: clamp(42px, 6.5vw, 76px);
+}
+
+.join-content > p:not(.eyebrow) {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: #d8c6c5;
+  margin-top: 20px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 65px 20px;
+  background: #050406;
+  border-top: 1px solid #2d161d;
+}
+
+.footer-brand {
+  font-family: Cinzel, serif;
+  color: #d11f37;
+  font-size: 26px;
+  letter-spacing: 4px;
+  font-weight: 700;
+}
+
+footer p {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #aba0a2;
+  margin-top: 18px;
+  font-family: Cinzel, serif;
+}
+
+.footer-line {
+  width: 90px;
+  border-bottom: 1px solid #7c293b;
+  margin: 28px auto;
+}
+
+footer small {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #8c7b7d;
+  font-family: Cinzel, serif;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 950px) {
+  .section {
+    padding: 85px 6%;
+  }
+  .leader-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .event-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .navbar {
+    padding: 0 5%;
+    height: 72px;
+  }
+  .navlinks {
+    display: none;
+  }
+  .mobile-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 0;
+    color: #e8c4c5;
+  }
+  .mobile-links {
+    display: flex;
+    position: absolute;
+    top: 72px;
+    right: 0;
+    left: 0;
+    background: rgba(19, 11, 14, 0.98);
+    backdrop-filter: blur(15px);
+    padding: 25px;
+    flex-direction: column;
+    gap: 20px;
+    border-bottom: 1px solid #552530;
+    z-index: 30;
+  }
+  .hero {
+    padding: 0 7%;
+    min-height: 620px;
+  }
+  .intro h1 {
+    font-size: clamp(36px, 9vw, 64px);
+  }
+  .pillar-left, .pillar-right {
+    width: 35px;
+  }
+}
+
+@media (max-width: 520px) {
+  .leader-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .stats {
+    gap: 25px;
+    flex-wrap: wrap;
+  }
+  .stats strong {
+    font-size: 26px;
+  }
+  .intro-sub {
+    letter-spacing: 2px;
+    font-size: 10px;
+  }
+  .moon {
+    width: 140px;
+    height: 140px;
+  }
+}
